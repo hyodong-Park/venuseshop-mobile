@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 187 200">
+  <!-- Generator: Adobe Illustrator 29.2.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 116)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#_무제_그라디언트_5);
+      }
+
+      .st1 {
+        fill: url(#_무제_그라디언트_4);
+      }
+    </style>
+    <linearGradient id="_무제_그라디언트_4" data-name="무제 그라디언트 4" x1="162.1" y1="62.5" x2="102.6" y2="168.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e14392"/>
+      <stop offset="1" stop-color="#8827af"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_5" data-name="무제 그라디언트 5" x1="92.5" y1="45.6" x2="46.2" y2="120.8" gradientTransform="translate(12.6 -20.3) rotate(13.3)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e14392"/>
+      <stop offset=".8" stop-color="#8827af"/>
+    </linearGradient>
+  </defs>
+  <path class="st1" d="M124.6,100c-8.2,7.5-19.1,12.1-31.1,12.1s-22.9-4.6-31.1-12.1C26.1,114.5,0,153.8,0,200h187.1c0-46.2-26.1-85.5-62.5-100Z"/>
+  <circle class="st0" cx="93.6" cy="43.9" r="43.9" transform="translate(-7.6 22.7) rotate(-13.3)"/>
+</svg>

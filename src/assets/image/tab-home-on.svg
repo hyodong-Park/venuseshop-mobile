@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" data-name="레이어_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 511.6">
+  <!-- Generator: Adobe Illustrator 29.2.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 116)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#_무제_그라디언트_6);
+      }
+    </style>
+    <linearGradient id="_무제_그라디언트_6" data-name="무제 그라디언트 6" x1="376" y1="102.4" x2="174.5" y2="490.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e14392"/>
+      <stop offset="1" stop-color="#8827af"/>
+    </linearGradient>
+  </defs>
+  <path class="st0" d="M250,0L0,178.6v333h186.5v-107.1c0-35,28.4-63.5,63.5-63.5h0c35,0,63.5,28.4,63.5,63.5v107.1h186.5V178.6L250,0Z"/>
+</svg>

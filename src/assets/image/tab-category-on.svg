@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
+  <!-- Generator: Adobe Illustrator 29.2.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 116)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#_무제_그라디언트_5);
+      }
+
+      .st1 {
+        fill: url(#_무제_그라디언트_10);
+      }
+
+      .st2 {
+        fill: url(#_무제_그라디언트_8);
+      }
+
+      .st3 {
+        fill: url(#_무제_그라디언트_6);
+      }
+    </style>
+    <linearGradient id="_무제_그라디언트_10" data-name="무제 그라디언트 10" x1="75.9" y1="14.5" x2="12.6" y2="81.2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e14392"/>
+      <stop offset="1" stop-color="#8827af"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_8" data-name="무제 그라디언트 8" x1="163.5" y1="33.2" x2="60.5" y2="172.3" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e14392"/>
+      <stop offset=".9" stop-color="#8827af"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_5" data-name="무제 그라디언트 5" x1="166.3" y1="15.3" x2="23.2" y2="180.2" gradientUnits="userSpaceOnUse">
+      <stop offset=".2" stop-color="#e14392"/>
+      <stop offset=".9" stop-color="#8827af"/>
+    </linearGradient>
+    <linearGradient id="_무제_그라디언트_6" data-name="무제 그라디언트 6" x1="209.6" y1="72.7" x2="113.5" y2="213.2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e14392"/>
+      <stop offset="1" stop-color="#8827af"/>
+    </linearGradient>
+  </defs>
+  <rect class="st1" width="92" height="92" rx="14.1" ry="14.1"/>
+  <rect class="st2" x="108" width="92" height="92" rx="14.1" ry="14.1"/>
+  <rect class="st0" y="108" width="92" height="92" rx="14.1" ry="14.1"/>
+  <rect class="st3" x="108" y="108" width="92" height="92" rx="14.1" ry="14.1"/>
+</svg>
