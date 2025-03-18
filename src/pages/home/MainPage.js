@@ -1,6 +1,8 @@
 import Headers from '../../components/Header';
 import Body from '../../components/Body';
 import Footer from '../../components/Footer';
+import PopupBanner from '../../components/PopupBanner';
+import 'swiper/css';
 
 function MainPage() {
 
@@ -10,6 +12,7 @@ function MainPage() {
             <Headers/>
             <Body/>
             <Footer/>
+            <PopupBanner/>
         </div>
     );
 }

@@ -99,9 +99,9 @@ function ProductTypeHorizon({product ,likeToggle}) {
                       <div className="name two-ellipsis"><span className="brand">{product.brand}</span>{product.goodsname}</div>
                       <div className="price">{product.realmoney}</div>
 
-                      {
-                          product.promotion ? <div className="promotion">{product.promotion}</div> : <></>
-                      }
+                      {product.promotion && product.promotion.trim() !== "" && (
+                          <div className="promotion">{product.promotion}</div>
+                      )}
                   </div>
               </Link>
           </div>
