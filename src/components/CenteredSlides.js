@@ -1,5 +1,6 @@
 import '../styles/main.css';
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from "react-router-dom";
 
 function CenteredSlides({ product, isActive }) {
   const introduceRef = useRef(null); // introduce 요소 참조
@@ -54,10 +55,12 @@ function CenteredSlides({ product, isActive }) {
     setIsOpen((prev) => !prev); // 클릭 시 상태 토글
   };
 
+  const strHref = product.packid !== undefined ? '/ProductDetail' : '#';
+
   return (
     <>
       <div className="productCentered productWrap">
-        <a href={()=>false}>
+        <Link  to={strHref} onClick={e => e.preventDefault}>
           {product.number && <div className="ranking best">{product.number}</div>}
           <div className="image not-filter">
             {
@@ -112,7 +115,7 @@ function CenteredSlides({ product, isActive }) {
 
 
           </div>
-        </a>
+        </Link>
       </div>
     </>
   );

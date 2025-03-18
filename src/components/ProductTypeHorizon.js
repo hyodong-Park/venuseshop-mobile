@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import likeOff from '../assets/image/like_off.svg';
 import likeOn from '../assets/image/like_on.svg';
+import { Link } from "react-router-dom";
 
 function ProductTypeHorizon({product ,likeToggle}) {
   
@@ -13,7 +14,7 @@ function ProductTypeHorizon({product ,likeToggle}) {
 
     const [like, setLike] = useState(product.like);
 
-      const ticking = useRef(false); // 중복 실행 방지
+    const ticking = useRef(false); // 중복 실행 방지
     
     useEffect(() => {
     
@@ -64,7 +65,7 @@ function ProductTypeHorizon({product ,likeToggle}) {
 
       }
 
-      function likeToggle(){
+      function likeToggle(event){
 
         event.stopPropagation();
         event.preventDefault();
@@ -79,10 +80,12 @@ function ProductTypeHorizon({product ,likeToggle}) {
         
       }
 
+      const strHref = product.packid !== undefined ? '/ProductDetail' : '#';
+
   return (
       <>
           <div className="productHorizon productWrap">
-              <a href={()=>false}>
+              <Link to={strHref} onClick={e => e.preventDefault}>
                   {
                       product.number && (
                           <div className={ Number(product.number) < 4 ? 'ranking best' : 'ranking' } >{product.number}</div>
@@ -97,13 +100,10 @@ function ProductTypeHorizon({product ,likeToggle}) {
                       <div className="price">{product.realmoney}</div>
 
                       {
-                          product.promotion ?
-
-                              <div className="promotion">{product.promotion}</div>
-                              : <></>
+                          product.promotion ? <div className="promotion">{product.promotion}</div> : <></>
                       }
                   </div>
-              </a>
+              </Link>
           </div>
       </>
   );
