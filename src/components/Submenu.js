@@ -1,11 +1,11 @@
 import '../styles/main.css'
 import React from 'react'
 import Lottie from "lottie-react";
-import submenu_1 from "../assets/image/lottie/균일가전.json"; // 로컬 JSON 파일 가져오기
-// import submenu_1 from '../src/assets/video/균일가전.mp4'
+// import submenu_1 from "../assets/image/lottie/균일가전.json"; // 로컬 JSON 파일 가져오기
+import submenu_1 from '../assets/video/균일가전.mp4'
 import submenu_2 from '../assets/video/신규가입.mp4'
 import submenu_3 from '../assets/video/웰컴백.mp4'
-import submenu_4 from '../assets/image/24AW.png'
+import submenu_4 from '../assets/image/룩북.png'
 import submenu_5 from '../assets/video/친구추천.mp4'
 import submenu_6 from '../assets/image/여성.png'
 import submenu_7 from '../assets/image/남성.png'
@@ -17,8 +17,8 @@ import submenu_10 from '../assets/image/임산부.png'
 function Submenu() {
 
     let submenuArray1 = [
-        // {type : 'video', src : submenu_1, title: '균일가전'},
-        {type : 'lottie', src : submenu_1, title: '균일가전'},
+        {type : 'video', src : submenu_1, title: '균일가전'},
+        // {type : 'lottie', src : submenu_1, title: '균일가전'},
         {type : 'video', src : submenu_2, title: '신규가입'},
         {type : 'video', src : submenu_3, title: '웰컴백'},
         {type : 'image', src : submenu_4, title: '룩북'},

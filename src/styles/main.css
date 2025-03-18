@@ -267,7 +267,7 @@ img{
 
 .mainCategory video{
     display:block;
-    /* width:100%; */
+     width:100%;
 }
 
 .titleWrap{
@@ -1895,10 +1895,6 @@ header.scrolled .headercategory{
     left:26px;
 }
 
-.arrayPop{
-
-}
-
 .bottomPop{
     position:fixed;
     bottom:0;
@@ -1907,6 +1903,29 @@ header.scrolled .headercategory{
     background:#fff;
     width:100%;
     padding:24px 20px;
+}
+
+.bottomPop.bannerPop{
+    padding:0;
+    overflow: hidden;
+    max-width:600px;
+    left:50%;
+    transform:translate(-50%, 0);
+}
+
+.bottomPop.bannerPop .swiper-pagination{
+    width:45px;
+    height: 25px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.4);;
+    margin-left:auto;
+    font-size:14px;
+    color:#fff;
+    right:10px;
+    bottom:10px;
 }
 
 .popDimm{
@@ -1922,6 +1941,10 @@ header.scrolled .headercategory{
     overflow:hidden;
 }
 
+.ReactModal__Body--open{
+    overflow:hidden;
+}
+
 .modal-header{
     display:flex;
     justify-content: space-between;
@@ -1931,6 +1954,22 @@ header.scrolled .headercategory{
 
 .modal-header h2{
     font-size:18px;
+}
+
+.bannerPop .modal-footer{
+    height:50px;
+    display:flex;
+    align-items: center;
+    padding:0 20px;
+    justify-content: space-between;
+}
+
+.bannerPop .modal-footer button{
+    color:#999;
+}
+
+.bannerPop .modal-footer .modal-close{
+    color:#fa5099;
 }
 
 .radiobox-wrap{
@@ -2008,7 +2047,7 @@ header.scrolled .headercategory{
     height:calc((100vw - 52px) / 2);
 }
 
-.single-product>div{
+.single-product .productVertical{
     width:100%;
     padding-bottom:24px;
 }
