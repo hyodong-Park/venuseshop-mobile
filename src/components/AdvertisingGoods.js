@@ -57,8 +57,6 @@ function AdvertisingGoods() {
           venus.push(obj);
         }
 
-        console.log(venus)
-
         for(let i = 0 ; i < solbItems.length; i++) {
 
           const data = solbItems[i];
@@ -132,8 +130,6 @@ function AdvertisingGoods() {
       setSubtitle('2024 AW WACOAL')
     }
   };
-
-  console.log(venusProduct);
 
   const brand = [
     '비너스', '솔브', '와코루'

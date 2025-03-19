@@ -54,7 +54,6 @@ function MonthlyVenus() {
             month.push(obj);
           }
 
-          console.log(month);
           setProduct(month)
           setIsDataLoaded(true);  // 데이터 로딩 완료 상태 업데이트
 
