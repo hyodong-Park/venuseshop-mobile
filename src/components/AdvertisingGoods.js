@@ -13,8 +13,95 @@ import wacoalProductBg from '../assets/image/ad-wacoal.jpg';
 
 // import circleArrow from '../src/assets/image/circle-arrow-right-fill.svg';
 import circleArrow from '../assets/image/arrow_fill.svg';
+import axios from "axios";
 
 function AdvertisingGoods() {
+
+  let [venusProduct,setvenuslist] = useState([]);
+  let [solbProduct,setsolblist] = useState([]);
+  let [wacoalProduct,setwacoallist] = useState([]);
+
+  useEffect(() => {
+
+  const instance = axios.create({
+    baseURL: 'http://52.79.198.9:8000/eshop/api/',
+    // baseURL: 'http://192.168.0.143:8080/eshop/api/',
+    timeout: 10000,
+  });
+
+  instance.get('/product/aditem')
+      .then(response => {
+        const datalist = response.data.data;
+
+        const venusItems = datalist.venus;  // venus 리스트
+        const solbItems = datalist.solb;  // solb 리스트
+        const wacoalItems = datalist.wacoal;  // wacoal 리스트
+
+        let venus = [];
+        let solb = [];
+        let wacoal = [];
+
+        for(let i = 0 ; i < venusItems.length; i++) {
+
+          const data = venusItems[i];
+
+          const obj = {
+            pack_content_id: data.pack_content_id,
+            img : 'https://www.venus-eshop.co.kr/images/' + data.goods_image,
+            brand : data.info_brand,
+            goodsname : data.goods_model,
+            realmoney : data.price,
+            promotion : data.goods_promotion,
+            like : false
+          }
+          venus.push(obj);
+        }
+
+        console.log(venus)
+
+        for(let i = 0 ; i < solbItems.length; i++) {
+
+          const data = solbItems[i];
+
+          const obj = {
+            pack_content_id: data.pack_content_id,
+            img : 'https://www.venus-eshop.co.kr/images/' + data.goods_image,
+            brand : data.info_brand,
+            goodsname : data.goods_model,
+            realmoney : data.price,
+            promotion : data.goods_promotion,
+            like : false
+          }
+          solb.push(obj);
+        }
+
+        for(let i = 0 ; i < wacoalItems.length; i++) {
+
+          const data = wacoalItems[i];
+
+          const obj = {
+            pack_content_id: data.pack_content_id,
+            img : 'https://www.venus-eshop.co.kr/images/' + data.goods_image,
+            brand : data.info_brand,
+            goodsname : data.goods_model,
+            realmoney : data.price,
+            promotion: data.goods_promotion != null ? "AW광고제품" : data.goods_promotion,
+            like : false
+          }
+          wacoal.push(obj);
+        }
+
+        setvenuslist(venus);
+        setsolblist(solb);
+        setwacoallist(wacoal);
+
+
+      })
+      .catch(error => {
+        console.log(error)
+      });
+
+  }, []);
 
   const [activeTab, setActiveTab] = useState(0); // 활성화된 탭의 인덱스를 관리
 
@@ -46,6 +133,8 @@ function AdvertisingGoods() {
     }
   };
 
+  console.log(venusProduct);
+
   const brand = [
     '비너스', '솔브', '와코루'
   ]
@@ -53,49 +142,53 @@ function AdvertisingGoods() {
   const [product, setProduct] = useState([]); // 현재 표시할 제품 목록 상태
 
 
-  let venusProduct = [
-    { img: 'https://www.venus-eshop.co.kr/images/VBR099020240814163021280Product01.png', goodsname: 'SINCE 1954. 아뜰리에 (VBR0990)', realmoney: '85,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VPT0990T20240814163315633Product05.png', goodsname: '[광고]아뜰리에 티팬티(VPT0990T)', realmoney: '29,000원', like:true },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '클래식 이즈 뉴 브라 VER.1(VBRI642)', realmoney: '49,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI63020241008101810162Product08.png', goodsname: '비너스 러블리 파스텔 레이스 브라(VBRI642)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBTM73020241113160407097Product01.png', goodsname: '파워네트 홑겹 나염 쉐이퍼(VBTM730)', realmoney: '45,000원', like:false }
-  ];
 
-  let solbProduct = [
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD28820221221103057969Product03.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SLGE00220240517165218632Product03.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD12320210607105143231Product04.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '클래식 이즈 뉴 브라 VER.1(VBRI642)', realmoney: '49,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRE22020240329145410019Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SPTD123H20210607110354284Product04.png', goodsname: '비너스 러블리 파스텔 레이스 브라(VBRI642)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBTM73020241113160407097Product01.png', goodsname: '파워네트 홑겹 나염 쉐이퍼(VBTM730)', realmoney: '45,000원', like:false }
-  ]
+  // let venusProduct = [
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBR099020240814163021280Product01.png', goodsname: 'SINCE 1954. 아뜰리에 (VBR0990)', realmoney: '85,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VPT0990T20240814163315633Product05.png', goodsname: '[광고]아뜰리에 티팬티(VPT0990T)', realmoney: '29,000원', like:true },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '클래식 이즈 뉴 브라 VER.1(VBRI642)', realmoney: '49,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI63020241008101810162Product08.png', goodsname: '비너스 러블리 파스텔 레이스 브라(VBRI642)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBTM73020241113160407097Product01.png', goodsname: '파워네트 홑겹 나염 쉐이퍼(VBTM730)', realmoney: '45,000원', like:false }
+  // ];
+  //
+  // let solbProduct = [
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD28820221221103057969Product03.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SLGE00220240517165218632Product03.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD12320210607105143231Product04.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '클래식 이즈 뉴 브라 VER.1(VBRI642)', realmoney: '49,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRE22020240329145410019Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SPTD123H20210607110354284Product04.png', goodsname: '비너스 러블리 파스텔 레이스 브라(VBRI642)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBTM73020241113160407097Product01.png', goodsname: '파워네트 홑겹 나염 쉐이퍼(VBTM730)', realmoney: '45,000원', like:false }
+  // ]
+  //
+  // let wacoalProduct = [
+  //   { img: 'https://www.venus-eshop.co.kr/images/WPT2070S20240814163801476Product01.png', goodsname: '[광고]이터널 클래식 레이스팬티(WPT2070S)', realmoney: '45,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/WPT2070H20240814163741028Product01.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/WBR194820241212132218831Product01.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', promotion: 'AW광고제품', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '클래식 이즈 뉴 브라 VER.1(VBRI642)', realmoney: '49,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBRI63020241008101810162Product08.png', goodsname: '비너스 러블리 파스텔 레이스 브라(VBRI642)', realmoney: '35,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', like:false },
+  //   { img: 'https://www.venus-eshop.co.kr/images/VBTM73020241113160407097Product01.png', goodsname: '파워네트 홑겹 나염 쉐이퍼(VBTM730)', realmoney: '45,000원', like:false }
+  // ]
 
-  let wacoalProduct = [
-    { img: 'https://www.venus-eshop.co.kr/images/WPT2070S20240814163801476Product01.png', goodsname: '[광고]이터널 클래식 레이스팬티(WPT2070S)', realmoney: '45,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/WPT2070H20240814163741028Product01.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/WBR194820241212132218831Product01.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', promotion: 'AW광고제품', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '클래식 이즈 뉴 브라 VER.1(VBRI642)', realmoney: '49,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '45,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI64220241115092311928Product08.png', goodsname: '프렌치 가든 헴팬티(SOPT6845H)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/SBRD45520241104095419257Product07.png', goodsname: '러브 글램 더블윙 브라(SBRD455)', realmoney: '36,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBRI63020241008101810162Product08.png', goodsname: '비너스 러블리 파스텔 레이스 브라(VBRI642)', realmoney: '35,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBR099120240821144145733Product10.png', goodsname: 'SINCE 1954. 아뜰리에2(VBR0991)', realmoney: '83,000원', like:false },
-    { img: 'https://www.venus-eshop.co.kr/images/VBTM73020241113160407097Product01.png', goodsname: '파워네트 홑겹 나염 쉐이퍼(VBTM730)', realmoney: '45,000원', like:false }
-  ]
 
-
+  // 첫 로딩시 venusProduct 리스트가 불러질 경우에만
   React.useEffect(() => {
-    setProduct(venusProduct);
-  }, []);
+    if (venusProduct.length > 0) {
+      setProduct(venusProduct);
+    }
+  }, [venusProduct]);
 
   useEffect(() => {
     // 제품 변경 완료 후 Swiper를 첫 번째 슬라이드로 이동
@@ -114,8 +207,6 @@ function AdvertisingGoods() {
         )
     );
 };
-
-
 
   return (
     <>
@@ -141,7 +232,7 @@ function AdvertisingGoods() {
                     <ProductTypeVertical
                       product={{
                         img: item.img,
-                        goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, like:item.like
+                        goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, like:item.like, pack_content_id:item.pack_content_id
                       }}
                       likeToggle={() => likeToggle(index)}
                     />

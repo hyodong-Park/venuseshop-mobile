@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import likeOff from '../assets/image/like_off.svg';
 import likeOn from '../assets/image/like_on.svg';
 import sizeIco from '../assets/image/sizeview.svg';
+import { Link } from "react-router-dom";
 
 function ProductTypeVertical({product ,likeToggle}) {
 
@@ -82,19 +83,19 @@ function ProductTypeVertical({product ,likeToggle}) {
         
     //   }
 
+
     const visibleColor = Array.isArray(product.colorChip) ? product.colorChip.slice(0, 5) : [];
     const remainingCount = Array.isArray(product.colorChip) ? product.colorChip.length - 5 : 0;
-  
+
     return (
         <>
             <div className="productVertical productWrap">
-                <a href={()=>false}>
+                <Link to={`/api/product/detail/${product.pack_content_id}`} onClick={e => e.preventDefault()}>
                     {
                         product.number && (
                             <div className="ranking best">{product.number}</div>
                         )
                     }
-
                     <div className="image">
                         {
                             product.couponinfo && (
@@ -181,7 +182,7 @@ function ProductTypeVertical({product ,likeToggle}) {
                         }
 
                     </div>
-                </a>
+                </Link>
             </div>
         </>
     );
