@@ -4,6 +4,7 @@ import Body from './components/Body';
 import Footer from './components/Footer';
 import Router from './Router';
 import React, { useEffect } from "react";
+import ScrollToTop from "./components/ScrollToTop";
 // import ThemeColor from './ThemeColor';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       {/*<Body/>*/}
       {/*<Footer/>*/}
         <Router />
+        {/*<ScrollToTop />*/}
 
     </div>
   );

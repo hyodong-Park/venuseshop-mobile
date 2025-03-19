@@ -47,7 +47,7 @@ function Weeklybest() {
                         goodsname : data.goods_model,
                         realmoney : data.price,
                         promotion : data.goods_promotion,
-                        href : '/api/product/detail/' + data.pack_content_id,
+                        packid : data.pack_content_id,
                         like : false
                     }
 
@@ -67,7 +67,7 @@ function Weeklybest() {
                         goodsname : data.goods_model,
                         realmoney : data.price,
                         promotion : data.goods_promotion,
-                        href : '/api/product/detail/' + data.pack_content_id,
+                        packid : data.pack_content_id,
                         like : false
                     }
 
@@ -86,7 +86,7 @@ function Weeklybest() {
                         goodsname : data.goods_model,
                         realmoney : data.price,
                         promotion : data.goods_promotion,
-                        href : '/api/product/detail/' + data.pack_content_id,
+                        packid : data.pack_content_id,
                         like : false
                     }
 
@@ -105,7 +105,7 @@ function Weeklybest() {
                         goodsname : data.goods_model,
                         realmoney : data.price,
                         promotion : data.goods_promotion,
-                        href : '/api/product/detail/' + data.pack_content_id,
+                        packid : data.pack_content_id,
                         like : false
                     }
 
@@ -162,7 +162,7 @@ function Weeklybest() {
                             {braWrap1.map((item, index) => (
                                 <ProductTypeHorizon
                                     product={{
-                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, href: item.href, like:item.like
+                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, packid: item.packid, like:item.like
                                     }}
                                     key={index}
                                 />
@@ -172,7 +172,7 @@ function Weeklybest() {
                             {braWrap2.map((item, index) => (
                                 <ProductTypeHorizon
                                     product={{
-                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, href: item.href, like:item.like
+                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, packid: item.packid, like:item.like
                                     }}
                                     key={index}
                                 />
@@ -182,7 +182,7 @@ function Weeklybest() {
                             {pantyWrap.map((item, index) => (
                                 <ProductTypeHorizon
                                     product={{
-                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, href: item.href, like:item.like
+                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, packid: item.packid, like:item.like
                                     }}
                                     key={index}
                                 />
@@ -192,7 +192,7 @@ function Weeklybest() {
                             {correctionWrap.map((item, index) => (
                                 <ProductTypeHorizon
                                     product={{
-                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, href: item.href, like:item.like
+                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, packid: item.packid, like:item.like
                                     }}
                                     key={index}
                                 />
@@ -202,7 +202,7 @@ function Weeklybest() {
                             {pajamaWrap.map((item, index) => (
                                 <ProductTypeHorizon
                                     product={{
-                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, href: item.href, like:item.like
+                                        img: item.img, number: item.number, brand: item.brand, goodsname: item.goodsname, realmoney: item.realmoney, promotion: item.promotion, packid: item.packid, like:item.like
                                     }}
                                     key={index}
                                 />

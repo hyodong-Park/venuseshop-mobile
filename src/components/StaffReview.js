@@ -1,26 +1,64 @@
 import '../styles/main.css'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import StaffReviewForm from './StaffReviewForm';
 import TitleWrap from './TitleWrap';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 
 import circleArrow from '../assets/image/circle-arrow-right.svg';
+import axios from "axios";
 
 function StaffReview() {
 
-    let staffReviewList = [
-        {img:'https://d1nb1kdtagrict.cloudfront.net/venusstore/ecstaff00220241129181305799StaffReview1.png', productImg:'https://www.venus-eshop.co.kr/images/OBR370220240905171425826Product01.png', title:'에어로쿨 항균&소취 기능성 운동 브라 추천', reviewLink:'#', productLink:'#', brand:'오르화', goodsname:'하이써포트 심리스 브라(OBR3702)', realmoney:'83,000원'},
-        {img:'https://d1nb1kdtagrict.cloudfront.net/venusstore/ecstaff00320241212104405147StaffReview1.png', productImg:'https://www.venus-eshop.co.kr/images/OBR591420240705151401970Product06.png', title:'세련된 느낌적인 너낌 뭔지 알죠?', reviewLink:'#', productLink:'#', brand:'오르화', goodsname:'하이서포트 풀메이크업 브라(OBR5914)', realmoney:'125,000원'},
-        {img:'https://d1nb1kdtagrict.cloudfront.net/venusstore/solbstaff00120241230083547703StaffReview1.png', productImg:'https://www.venus-eshop.co.kr/images/SBRD45720241205134053474Product07.png', title:'연말 감성 뿜뿜한 프리미엄 부유방 커버 브라!', reviewLink:'#', productLink:'#', brand:'솔브', goodsname:'홀리데이 프리미엄 부유방 커버 브라(SBRD457)', realmoney:'53,000원'},
-        {img:'https://d1nb1kdtagrict.cloudfront.net/venusstore/solbstaff00120241230084005586StaffReview1.png', productImg:'https://www.venus-eshop.co.kr/images/SPTD457S20241205134112416Product08.png', title:'섹시한 레이스 팬티를 찾으신다면 *_!', reviewLink:'#', productLink:'#', brand:'솔브', goodsname:'홀리데이 프리미엄 레이스팬티(SPTD457S)', realmoney:'23,000원'},
-        {img:'https://d1nb1kdtagrict.cloudfront.net/venusstore/solbstaff00120241230100709081StaffReview1.png', productImg:'https://www.venus-eshop.co.kr/images/SPTD457T20241219140501099Product01.png', title:'특별한날 특별한 감성을 (u‿ฺu✿ฺ)', reviewLink:'#', productLink:'#', brand:'솔브', goodsname:'홀리데이 프리미엄 티팬티(SPTD457T)', realmoney:'23,000원'},
-    ]
+
+    let [staffReviewList,setStaffReviewList] = useState([]);
+
+    useEffect(() => {
+
+        const instance = axios.create({
+            baseURL: 'http://52.79.198.9:8000/eshop/api/',
+            // baseURL: 'http://192.168.0.143:8080/eshop/api/',
+            timeout: 10000,
+        });
+
+        instance.get('/staffreview/main/list')
+            .then(response => {
+
+                const staffreview = response.data.data;
+
+                let staffreviewTmp = [];
+
+                for(let i = 0 ; i < staffreview.length; i++) {
+
+                    const data = staffreview[i];
+
+                    const obj = {
+                        img :  data.bannerimg,
+                        productImg : data.productimg,
+                        brand : data.brandname,
+                        title : data.title,
+                        goodsname : data.goodsname,
+                        realmoney : data.rrp.toLocaleString() + '원',
+                        reviewLink : '/staffreview/detail/' + data.targetid,
+                        productLink : '/api/product/detail/' + data.packid
+                    }
+
+                    staffreviewTmp.push(obj);
+                    setStaffReviewList(staffreviewTmp)
+                }
+
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+
+    }, []);
   
   return (
       <>
           <section>
-              <TitleWrap content={{ text: '리뷰가 검증된 상품', type: 'all', subText: '이유있는 추천, 스탭리뷰' }} />
+              <TitleWrap content={{ text: '리뷰가 검증된 상품', type: 'all', subText: '이유있는 추천, 스탭리뷰', href:'/staffreview/main/' }} />
               <Swiper spaceBetween={12} slidesPerView={'auto'} slidesOffsetAfter={20} slidesOffsetBefore={20}>
                   {staffReviewList.map((item, index) => (
                       <SwiperSlide className="staffreviewWrap" style={{ width: '258px' }} key={index}>

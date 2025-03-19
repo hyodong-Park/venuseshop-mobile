@@ -1,19 +1,20 @@
 import '../styles/main.css'
 import React from 'react'
+import { Link } from "react-router-dom";
 
 function StaffReviewForm({content}) {
-  
+
     return (
         <>
             <div>
                     <div className="image">
-                    <a href={()=>false}>
-                        <img src={content.img} />
-                        <div className="title">{content.title}</div>
-                        </a>
+                        <Link to={content.reviewLink} onClick={e => e.preventDefault}>
+                            <img src={content.img} />
+                            <div className="title">{content.title}</div>
+                        </Link>
                     </div>
                 
-                <a href={()=>false}>
+                <Link to={content.productLink} onClick={e => e.preventDefault}>
                     <div className="meta">
                         <div className="product-image"><img src={content.productImg} /></div>
                         <div className="product-text">
@@ -21,7 +22,7 @@ function StaffReviewForm({content}) {
                             <div className="price">{content.realmoney}</div>
                         </div>
                     </div>
-                </a>
+                </Link>
             </div>
         </>
     );

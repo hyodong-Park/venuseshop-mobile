@@ -23,10 +23,10 @@ function Headers({category}) {
 
 
   const [headerMenu, setHeaderMenu] = useState([
-    { title: "신상품", subtitle: "금주의", href: "/NewProduct" },
+    { title: "신상품", subtitle: "금주의", href: "/newproduct" },
     { title: "홈", href: "/", active: true },
     { title: "균일가전", subtitle: "UPTO 80%", href: "#" },
-    { title: "베스트", href: "#" },
+    { title: "베스트", href: "/bestproduct" },
     { title: "25SS", href: "#" },
     { title: "세일 중", href: "#" },
     { title: "쿠폰&혜택", href: "#" },
@@ -144,7 +144,7 @@ function Headers({category}) {
       </div>
 
       {
-        location.pathname == "/NewProduct" ?
+        (location.pathname === "/newproduct" || location.pathname === "/bestproduct") ?
 
             <HeaderCategory content={category}/>
             : <></>

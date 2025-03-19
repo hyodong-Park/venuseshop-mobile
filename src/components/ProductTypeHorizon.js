@@ -80,7 +80,7 @@ function ProductTypeHorizon({product ,likeToggle}) {
         
       }
 
-      const strHref = product.packid !== undefined ? '/ProductDetail' : '#';
+      const strHref = product.packid !== undefined ? '/api/product/detail/' + product.packid : '#';
 
   return (
       <>
