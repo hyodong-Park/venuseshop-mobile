@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import likeOff from '../assets/image/like_off.svg';
 import likeOn from '../assets/image/like_on.svg';
 import { Link } from "react-router-dom";
+import {changeWishItem} from "../api/commonApi";
 
 function ProductTypeHorizon({product ,likeToggle}) {
   
@@ -60,25 +61,32 @@ function ProductTypeHorizon({product ,likeToggle}) {
                 { scale: 0, duration: 0.1, ease: "power2.out" } // 목표 크기와 애니메이션 속성
               );
               isOff.eventCallback('onComplete',preventDuplication);
-
         }
-
       }
 
-      function likeToggle(event){
+    var likeToggle = async (event) => {
 
         event.stopPropagation();
         event.preventDefault();
 
-        if(!ticking.current) {
+        if (!ticking.current) {
             ticking.current = true;
 
-        setLike(!like)
+            try {
 
+                await changeWishItem(!like, 1)
+                    .then(response => {
+
+                        if (response.success && response.message !== '이미 찜한 상품입니다.') setLike(!like);
+                        else alert(response.message)
+                    })
+            } catch (error) {
+                alert(error.message)
+            } finally {
+                ticking.current = false;
+            }
         }
-
-        
-      }
+    }
 
       const strHref = product.packid !== undefined ? '/api/product/detail/' + product.packid : '#';
 

@@ -9,7 +9,7 @@ import searchWhiteImport from '../assets/image/search-white.svg';
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useLocation, Link } from "react-router-dom";
 import HeaderCategory from "./HeaderCategory";
-
+import {login, logout} from "../api/commonApi";
 
 function Headers({category}) {
   const logoBlack = logoBlackImport;
@@ -113,6 +113,18 @@ function Headers({category}) {
 }, [isState1]);
 
 
+  const setLogin = () => {
+    login()
+        .then(response => alert('로그인 되었습니다.'))
+        .catch(error => alert('로그인 중 오류가 발생하였습니다.'))
+  }
+
+  const setLogout = () => {
+    logout()
+        .then(response => alert('로그아웃 되었습니다.'))
+        .catch(error => alert('로그아웃 중 오류가 발생하였습니다.'))
+  }
+
   return (
     <header id="header" className={`header ${isState1 ? "white" : ""} ${isState2 ? "scrolled" : ""}`}>
       <div className="mainheader">
@@ -121,6 +133,9 @@ function Headers({category}) {
               <img src={location.pathname !== "/" ? logoBlack : isState1 ? logoBlack : logoWhite} />
             </div>   
             <div className="header-buttonWrap">
+              <button style={{width: '100px', backgroundColor : 'white', border: '1px solid black'}} onClick={setLogin}>로그인(임시)</button>
+              <button style={{width: '100px', backgroundColor : 'white', border: '1px solid black'}} onClick={setLogout}>로그아웃(임시)</button>
+
               <button><img src={location.pathname !== "/" ? searchBlack : isState1 ? searchBlack : searchWhite} /></button>
               <div className="cart">
                 <button><img src={location.pathname !== "/" ? cartBlack : isState1 ? cartBlack : cartWhite} /></button>
