@@ -5,7 +5,7 @@ import TitleWrap from './TitleWrap';
 import TabNav from './TabNav';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import axios from 'axios';
+import {baseApi} from '../api/axiosInstance';
 
 function Weeklybest() {
 
@@ -17,13 +17,13 @@ function Weeklybest() {
 
     useEffect(() => {
 
-        const instance = axios.create({
-            baseURL: 'http://52.79.198.9:8000/eshop/api/',
-            // baseURL: 'http://192.168.0.143:8080/eshop/api/',
-            timeout: 10000,
-        });
+        // const instance = axios.create({
+        //     baseURL: 'http://52.79.198.9:8000/eshop/api/',
+        //     // baseURL: 'http://192.168.0.143:8080/eshop/api/',
+        //     timeout: 10000,
+        // });
 
-        instance.get('/product/weeklybest')
+        baseApi.get('/product/weeklybest')
             .then(response => {
 
                 const bra = response.data.data.bra;
@@ -35,6 +35,8 @@ function Weeklybest() {
                 let pantyTmp = [];
                 let correctionTmp = [];
                 let pajamaTmp = [];
+
+                console.log(response);
 
                 for(let i = 0 ; i < bra.length; i++) {
 
@@ -48,7 +50,7 @@ function Weeklybest() {
                         realmoney : data.price,
                         promotion : data.goods_promotion,
                         packid : data.pack_content_id,
-                        like : false
+                        like : data.wish
                     }
 
                     braTmp.push(obj);
@@ -68,7 +70,7 @@ function Weeklybest() {
                         realmoney : data.price,
                         promotion : data.goods_promotion,
                         packid : data.pack_content_id,
-                        like : false
+                        like : data.wish
                     }
 
                     pantyTmp.push(obj);
@@ -87,7 +89,7 @@ function Weeklybest() {
                         realmoney : data.price,
                         promotion : data.goods_promotion,
                         packid : data.pack_content_id,
-                        like : false
+                        like : data.wish
                     }
 
                     correctionTmp.push(obj);
@@ -106,7 +108,7 @@ function Weeklybest() {
                         realmoney : data.price,
                         promotion : data.goods_promotion,
                         packid : data.pack_content_id,
-                        like : false
+                        like : data.wish
                     }
 
                     pajamaTmp.push(obj);
