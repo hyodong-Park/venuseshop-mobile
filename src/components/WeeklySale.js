@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 
 import slideStopIco from '../assets/image/stop-gray.svg';
 import slidePlayIco from '../assets/image/play-gray.svg';
-import axios from "axios";
+import {baseApi} from '../api/axiosInstance';
 
 function WeeklySale() {
 
@@ -18,12 +18,7 @@ function WeeklySale() {
 
   useEffect(() => {
 
-    const instance = axios.create({
-      baseURL: 'http://52.79.198.9:8000/eshop/api/',
-      timeout: 10000,
-    });
-
-    instance.get('/product/weeklybestsale')
+    baseApi.get('/product/weeklybestsale')
       .then(response => {
         const datalist = response.data.data;
 

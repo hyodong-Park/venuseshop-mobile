@@ -17,12 +17,6 @@ function Weeklybest() {
 
     useEffect(() => {
 
-        // const instance = axios.create({
-        //     baseURL: 'http://52.79.198.9:8000/eshop/api/',
-        //     // baseURL: 'http://192.168.0.143:8080/eshop/api/',
-        //     timeout: 10000,
-        // });
-
         baseApi.get('/product/weeklybest')
             .then(response => {
 
@@ -35,8 +29,6 @@ function Weeklybest() {
                 let pantyTmp = [];
                 let correctionTmp = [];
                 let pajamaTmp = [];
-
-                console.log(response);
 
                 for(let i = 0 ; i < bra.length; i++) {
 
@@ -119,20 +111,7 @@ function Weeklybest() {
             .catch(error => {
                 console.log(error)
             });
-
-        // instance.post('/auth/login',{username : 'gsm0530test94', password : 'sooin12!'})
-        //     .then(response => {
-        //         console.log('!!인증')
-        //         console.log(response)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     });
-
     }, []);
-
-
-
 
     const [activeIndex, setActiveIndex] = useState(0); // 현재 활성화된 슬라이드 인덱스 관리
     const swiperRef = useRef(null); // Swiper 인스턴스 참조

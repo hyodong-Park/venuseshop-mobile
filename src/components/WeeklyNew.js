@@ -5,7 +5,7 @@ import TitleWrap from './TitleWrap';
 import TabNav from './TabNav';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import axios from "axios";
+import {baseApi} from '../api/axiosInstance';
 
 function WeeklyNew() {
 
@@ -17,74 +17,49 @@ function WeeklyNew() {
 
     useEffect(() => {
 
-        const instance = axios.create({
-            baseURL: 'http://52.79.198.9:8000/eshop/api/',
-            timeout: 10000,
-        });
+        function productSetting(productList, type) {
 
-        instance.get('/product/weeklynew')
+            let listTmp = [];
+
+            for(let i = 0 ; i < productList.length; i++) {
+
+                const data = productList[i];
+
+                const obj = {
+                    packid: data.pack_content_id,
+                    img: 'https://www.venus-eshop.co.kr/images/' + data.goods_image,
+                    brand: data.info_brand,
+                    goodsname: data.goods_model,
+                    realmoney: data.price,
+                    promotion: data.info_pdesc,
+                    like: data.wish
+                }
+
+                listTmp.push(obj);
+
+                if (i === 3) {
+
+                    if (type === "woman") setWoman1(listTmp);
+                    else setMan1(listTmp);
+                    listTmp = [];
+                } else if (i === 7) {
+
+                    if (type === "woman") setWoman2(listTmp);
+                    else setMan2(listTmp);
+                    listTmp = [];
+                } else if (i === productList.length - 1) {
+
+                    setWoman3(listTmp);
+                }
+            }
+        }
+
+        baseApi.get('/product/weeklynew')
           .then(response => {
               const datalist = response.data.data;
 
-              let listTmp = [];
-
-              for (let i = 0; i < datalist.woman.length; i++) {
-
-                  const data = datalist.woman[i];
-
-                  const obj = {
-                      packid: data.pack_content_id,
-                      img: 'https://www.venus-eshop.co.kr/images/' + data.goods_image,
-                      brand: data.info_brand,
-                      goodsname: data.goods_model,
-                      realmoney: data.price,
-                      promotion: data.info_pdesc,
-                      like: data.wish
-                  }
-
-                  listTmp.push(obj);
-
-                  if (i === 3) {
-
-                      setWoman1(listTmp);
-                      listTmp = [];
-                  } else if (i === 7) {
-
-                      setWoman2(listTmp);
-                      listTmp = [];
-                  } else if (i === datalist.woman.length - 1) {
-
-                      setWoman3(listTmp);
-                      listTmp = [];
-                  }
-              }
-
-              for (let i = 0; i < datalist.man.length; i++) {
-
-                  const data = datalist.man[i];
-
-                  const obj = {
-                      packid: data.pack_content_id,
-                      img: 'https://www.venus-eshop.co.kr/images/' + data.goods_image,
-                      brand: data.info_brand,
-                      goodsname: data.goods_model,
-                      realmoney: data.price,
-                      promotion: data.info_pdesc,
-                      like: data.wish
-                  }
-
-                  listTmp.push(obj);
-
-                  if (i === 3) {
-
-                      setMan1(listTmp);
-                      listTmp = [];
-                  } else if (i === datalist.man.length - 1) {
-
-                      setMan2(listTmp);
-                      listTmp = [];
-                  }
-              }
+              productSetting(datalist.woman, "woman");
+              productSetting(datalist.man, "man");
           })
           .catch(error => {
               console.log(error)

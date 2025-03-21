@@ -1,12 +1,5 @@
 import '../styles/main.css'
-import React, { useRef, useState } from 'react'
-import banner_1 from '../assets/video/bannerVideo_1.mp4';
-import banner_2 from '../assets/video/bannerVideo_2.mp4';
-import banner_3 from '../assets/video/bannerVideo_3.mp4';
-
-import banner_1_png from '../assets/video/bannerVideo_1.png';
-import banner_2_png from '../assets/video/bannerVideo_2.png';
-import banner_3_png from '../assets/video/bannerVideo_3.png';
+import React, {useEffect, useRef, useState} from 'react'
 
 import slideStopIco from '../assets/image/stop-white.svg';
 import slidePlayIco from '../assets/image/play-white.svg';
@@ -15,22 +8,47 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Mainbanner() {
-  
-  // let bannerVideo = [banner_1,banner_2,banner_3,banner_4];c:\Users\admin\Downloads\222\sample4.mp4 c:\Users\admin\Downloads\222\sample2.mp4 c:\Users\admin\Downloads\222\sample3.mp4
-  let bannerVideo = [
-    {src: banner_1, main:'2024 AW\nVENUS', sub:'2024 A W 비너스 광고 기획전', thumnail : banner_1_png},
-    {src: banner_2, main:'브랜드 세일\nUP TO 78%', sub:'비너스 · 솔브 · 오르화', thumnail : banner_2_png},
-    {src: banner_3, main:'사이즈 무료교환\n이벤트', sub:'비너스이숍 신년 맞이', thumnail : banner_3_png},
-    // {src: banner_1, main:'2024 AW\nVENUS', sub:'2024 A W 비너스 광고 기획전'},
-    // {src: banner_2, main:'브랜드 세일\nUP TO 78%', sub:'비너스 · 솔브 · 오르화'},
-    // {src: banner_3, main:'사이즈 무료교환\n이벤트', sub:'비너스이숍 신년 맞이'},
-    // {src: banner_1, main:'2024 AW\nVENUS', sub:'2024 A W 비너스 광고 기획전'}
-    // {src: banner_4, main:'2025 새해맞이\n행운 이벤트', sub:'돌리기만하면 100% 당첨!'},
-  ]; //임시 1개만 표시.
 
-  // const [playing, setPlaying] = useState(true);
+  const [bannerVideo, setBannerVideo] = useState( [] );
+
+  useEffect(() => {
+
+    const instance = axios.create({
+      baseURL: 'http://52.79.198.9:8000/eshop/api/',
+      timeout: 10000,
+    });
+
+    instance.get('/banner/mainbanner')
+        .then(response => {
+          const datalist = response.data.data;
+
+          let listTmp = [];
+
+          for (let i = 0; i < datalist.length; i++) {
+
+            const data = datalist[i];
+
+            const obj = {
+              eventid: data.eventid,
+              main: data.title,
+              sub: data.subtitle,
+              src: data.videoSrc,
+              thumnail: data.thumbnail
+            }
+
+            listTmp.push(obj);
+          }
+
+          setBannerVideo(listTmp);
+        })
+        .catch(error => {
+          console.log(error)
+        });
+  }, []);
 
   const fractionRef = useRef(); // Fraction Pagination 요소를 참조
   const swiperRef = useRef(null); // Swiper 인스턴스 참조
@@ -38,18 +56,13 @@ function Mainbanner() {
 
   const toggleAutoplay = () => {
     if (swiperRef.current) {
-      // if (isPlaying) {
-      //   swiperRef.current.autoplay.stop(); // 자동재생 중지
-      // } else {
-      //   swiperRef.current.autoplay.start(); // 자동재생 시작
-      // }
+
       setIsPlaying(!isPlaying); // 상태 변경
     }
   };
 
 
   const updateFractionPagination = (swiper) => {
-
 
     // Fraction Pagination 업데이트
     if (fractionRef.current) {
@@ -80,11 +93,6 @@ function Mainbanner() {
       });
   
       // // 현재 활성 슬라이드 찾기 (loop 모드 대응)
-      // const activeSlide = swiper.slides[swiper.activeIndex];
-      // const activeVideo = activeSlide ? activeSlide.querySelector('video') : null;
-      // if (activeVideo) {
-      //   activeVideo.play();
-      // }
       const visibleSlides = [];
       for (let i = swiper.activeIndex; i < swiper.activeIndex + swiper.params.slidesPerView; i++) {
         visibleSlides.push(swiper.slides[i]);
@@ -98,7 +106,7 @@ function Mainbanner() {
         }
       });
 
-    }, 50); // Swiper의 loop 전환을 고려한 약간의 지연
+    }, 100); // Swiper의 loop 전환을 고려한 약간의 지연
   };
 
 
@@ -112,7 +120,7 @@ function Mainbanner() {
             handleSlideChange(swiper);
             updateFractionPagination(swiper);
           }}
-          onSwiper={(swiper) => {
+           onInit={(swiper) => {
             swiperRef.current = swiper
             handleSlideChange(swiper); // 초기 활성 슬라이드의 비디오 재생
             updateFractionPagination(swiper)
@@ -132,7 +140,7 @@ function Mainbanner() {
         >
           {bannerVideo.map((content, index) =>
             <SwiperSlide key={index}>
-              <a href={()=>false}>
+              <Link to={'/eventDetail?id' + content.id} onClick={e => e.preventDefault}>
                 <div className='topDimm'></div>
                 <video muted onEnded={handleVideoEnd} loop={!isPlaying} playsInline style={{zIndex:2, position:'relative'}}>
                   <source src={content.src} type="video/mp4" />
@@ -145,7 +153,7 @@ function Mainbanner() {
                 </div>
 
                 <div className='thumbnail' style={{position:"absolute",inset:0,width:'100%',height:'100%',zIndex:1}}><img src={content.thumnail} style={{width:'100%',height:"100%",objectFit:'cover'}}/></div>
-              </a>
+              </Link>
 
             </SwiperSlide>
           )}

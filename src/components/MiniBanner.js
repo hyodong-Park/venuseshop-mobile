@@ -1,35 +1,59 @@
 import '../styles/main.css'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import banner_1 from '../assets/image/minibanner_01.jpg';
-import banner_2 from '../assets/image/minibanner_02.jpg';
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function MiniBanner() {
 
-    let bannerList = [
-        { src: banner_1},
-        { src: banner_2},
-        // { src: banner_3}
-    ];
+    const [bannerList, setBannerList] = useState([])
+
+    useEffect(() => {
+
+        const instance = axios.create({
+            baseURL: 'http://52.79.198.9:8000/eshop/api/',
+            timeout: 10000,
+        });
+
+        instance.get('/banner/linebanner')
+            .then(response => {
+                const datalist = response.data.data;
+
+                let listTmp = [];
+
+                for(let i = 0 ; i < datalist.length; i++) {
+
+                    const data = datalist[i];
+
+                    const obj = { src: data.bannerImg }
+
+                    listTmp.push(obj);
+                }
+
+                setBannerList(listTmp);
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }, []);
 
   
     return (
+        bannerList.length === 0 ? <></> :
         <>
             <section>
                 <div className="minibanner">
                     <Swiper slidesPerView={1} modules={[Pagination, Autoplay]} autoplay={{ delay: 5000 }}
-                        pagination={{
-                            type: 'progressbar', el: '.minibanner .progress',
-                        }}
+                        pagination={{type: 'progressbar', el: '.minibanner .progress',}}
                         loop={true}>
                         {bannerList.map((banner, index) => (
                             <SwiperSlide key={index}>
-                                <a href={()=>false}>
+                                <Link to={'/eventDetail?id' + banner.id} onClick={e => e.preventDefault}>
                                     <img src={banner.src} />
-                                </a>
+                                </Link>
                             </SwiperSlide>
                         ))}
                     </Swiper>
