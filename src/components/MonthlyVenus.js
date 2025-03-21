@@ -14,21 +14,16 @@ import monthly01 from '../assets/image/monthly_01.jpg';
 import monthly02 from '../assets/image/monthly_02.jpg';
 import monthly03 from '../assets/image/monthly_03.jpg';
 import axios from "axios";
+import {baseApi} from "../api/axiosInstance";
 
 function MonthlyVenus() {
 
   let [MonthlyVenusProduct,setProduct] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);  // 데이터 로딩 상태 추가
 
-  const instance = axios.create({
-    baseURL: 'http://52.79.198.9:8000/eshop/api/',
-    // baseURL: 'http://192.168.0.143:8080/eshop/api/',
-    timeout: 10000,
-  });
-
   useEffect(() => {
 
-    instance.get('/product/monthitem')
+    baseApi.get('/product/monthitem')
         .then(response => {
           const monthlylist = response.data.data;
 
@@ -64,14 +59,6 @@ function MonthlyVenus() {
 
 
   }, []);
-
-
-  // let MonthlyVenusProduct = [
-  //   { img: monthly01, title: '서포트&위생팬티 추천', subtitle: '편안함은 기본!\n다양한 기능의 팬티 모음전' },
-  //   { img: monthly02, title: '스포츠브라 기획전', subtitle: '편안함과 동시에\n안정적인 피팅감👍🏻' },
-  //   { img: monthly03, title: '드로즈&브리프 추천', subtitle: '착용감은 물론\n고급스러운 디자인으로\n매일 입는 남성팬티🎁' },
-  //   { img: monthly02, title: '란제리 보정 기획전', subtitle: '70년 전통의\n프리미엄 보정라인💖' },
-  // ];
 
 
   const [activeIndex, setActiveIndex] = useState(0); // 활성 슬라이드 인덱스 관리

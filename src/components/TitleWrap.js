@@ -17,7 +17,7 @@ function TitleWrap({content}) {
         }
         {
           content.type == 'update' && (
-            <div><a href={()=>false} className="update">10:15 업데이트</a></div>
+            <div><a href={()=>false} className="update">{content.updatetime} 업데이트</a></div>
           )
         }
 
