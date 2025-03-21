@@ -11,9 +11,6 @@ import circleArrow from '../assets/image/circle-arrow-right-white.svg';
 import moreArrow from '../assets/image/promotion-arrow.svg';
 import refresh from '../assets/image/refresh.svg';
 
-import promotionBg1 from '../assets/image/promotion-bg01.jpg';
-import promotionBg2 from '../assets/image/promotion-bg02.jpg';
-import axios from "axios";
 import {baseApi} from "../api/axiosInstance";
 
 
@@ -41,6 +38,7 @@ function Promotion() {
                     promotion.push(obj)
                 }
 
+
                 promotionMap.current = promotion;
 
                 setEvent(promotionMap.current[0]);
@@ -56,6 +54,10 @@ function Promotion() {
     const swiperRef = useRef(null); // Swiper 인스턴스를 저장할 ref
 
     let promotionMap = useRef([]);
+
+    promotionMap.current = promotionMap.current.map(promotion => ({...promotion,
+        item: promotion.item.slice(0, 10)
+    }));
 
     const listcount = promotionMap.current.length
 
