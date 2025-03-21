@@ -30,7 +30,7 @@ function Promotion() {
 
                     const obj = {
                         title: data.title,
-                        item : data.productlist,
+                        item: data.productlist.slice(0, 10),
                         targetid : data.targetid,
                         index : i,
                         background : data.bannerimg
@@ -38,11 +38,9 @@ function Promotion() {
                     promotion.push(obj)
                 }
 
-
                 promotionMap.current = promotion;
 
                 setEvent(promotionMap.current[0]);
-
 
             })
             .catch(error => {
@@ -54,10 +52,6 @@ function Promotion() {
     const swiperRef = useRef(null); // Swiper 인스턴스를 저장할 ref
 
     let promotionMap = useRef([]);
-
-    promotionMap.current = promotionMap.current.map(promotion => ({...promotion,
-        item: promotion.item.slice(0, 10)
-    }));
 
     const listcount = promotionMap.current.length
 
